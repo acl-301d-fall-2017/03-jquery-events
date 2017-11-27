@@ -14,8 +14,11 @@ articleView.populateFilters = function() {
             authorName = $(this).attr('data-author');
 
             // TODO: Refactor this concatenation using a template literal.
-            optionTag = '<option value="' + authorName + '">' + authorName + '</option>';
-            
+
+            // optionTag = '<option value="' + authorName + '">' + authorName + '</option>';
+            optionTag `<option value=""> ${authorName} </option>`;
+            console.log (optionTag);
+             
             // TODO: Refactor this concatenation using a template literal.
             if ($('#author-filter option[value="' + authorName + '"]').length === 0) {
                 $('#author-filter').append(optionTag);
