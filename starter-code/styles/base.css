@@ -1,0 +1,31 @@
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+img {
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: grey;
+}
+
+h1 {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    font-size: 2em;
+}
+
+main {
+    width: 95%;
+    margin: 0 auto;
+}
+
+p {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
