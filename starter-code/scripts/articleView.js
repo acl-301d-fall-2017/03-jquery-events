@@ -46,6 +46,8 @@ articleView.handleAuthorFilter = function() {
 
         } else {
             // TODO: If the <select> menu was changed to an option that is blank, we should first show all the articles, except the one article we are using as a template.
+            $('article').show();
+            $('article.template').hide();
 
         }
         $('#category-filter').val('');
@@ -57,7 +59,19 @@ articleView.handleCategoryFilter = function() {
     // When an option with a value is selected, hide all the articles, then reveal the matches.
     // When the blank (default) option is selected, show all the articles, except for the template.
     // Be sure to reset the #author-filter while you are at it!
+    $('#category-filter').on('change', function() {
+        if ($(this).val()) {
+            $('article').hide();
+            $(`article[data-category='${$(this).val()}']`).fadeIn();
 
+        } else {
+            // TODO: If the <select> menu was changed to an option that is blank, we should first show all the articles, except the one article we are using as a template.
+            $('article').show();
+            $('article.template').hide();
+
+        }
+        $('#author-filter').val('');
+    });
 };
 
 articleView.handleMainNav = function() {
@@ -66,6 +80,11 @@ articleView.handleMainNav = function() {
     // So: You need to dynamically build a selector string with the correct ID, based on the data available to you on the .tab element that was clicked.
 
     // REVIEW: Now trigger a click on the first .tab element, to set up the page.
+    $('.main-nav .tab').on('click', function() {
+        $('.tab-content').hide();
+        $(`#${$(this).attr('data-content')}`).show();
+       
+    });
     $('.main-nav .tab:first').click();
 };
 
@@ -75,10 +94,18 @@ articleView.setTeasers = function() {
 
     // TODO: Add an event handler to reveal all the hidden elements, when the .read-on link is clicked. You can go ahead and hide the "Read On" link once it has been clicked. Be sure to prevent the default link-click action!
     // Ideally, we'd attach this as just one event handler on the #articles section, and let it process (in other words... delegate) any .read-on clicks that happen within child nodes.
+    $('#articles').on('click', '.read-on', function(e) {
+        e.preventDefault();
+        $('.article-body *:nth-of-type(n+2)').show();
+        $(this).hide();
+    } );
 };
 
 // TODO: Call all of the above functions, once we are sure the DOM is ready.
 $(document).ready(function() {
     articleView.populateFilters();
     articleView.handleAuthorFilter();
+    articleView.handleCategoryFilter();
+    articleView.handleMainNav();
+    articleView.setTeasers();
 });
