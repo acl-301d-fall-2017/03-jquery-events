@@ -5,7 +5,6 @@ const articleView = {};
 
 articleView.populateFilters = function() {
     $('article').each(function() {
-    // REVIEW: We can declare several variables at once and assign their values later when using let. Keep in mind that we cannot do this with const.
         let authorName, category, optionTag;
         if (!$(this).hasClass('template')) {
             // REVIEW: We need to take every author name from the page, and make it an option in the Author filter.
@@ -13,24 +12,33 @@ articleView.populateFilters = function() {
             // We started by grabbing the author's name from `this` article element, and then use that bit of text to create the option tag (in a variable named `optionTag`) that we append to the #author-filter select element.
             authorName = $(this).attr('data-author');
 
-            // TODO: Refactor this concatenation using a template literal.
-            optionTag = '<option value="' + authorName + '">' + authorName + '</option>';
+            optionTag = `<option value=${authorName}>${authorName}</option>`
+            // optionTag = '<option value="' + authorName + '">' + authorName + '</option>';
             
-            // TODO: Refactor this concatenation using a template literal.
-            if ($('#author-filter option[value="' + authorName + '"]').length === 0) {
+            if ($(`#author-filter option[value=${authorName}]`.length === 0)) {
                 $('#author-filter').append(optionTag);
             }
+            
+            // if ($('#author-filter option[value="' + authorName + '"]').length === 0) {
+            //     $('#author-filter').append(optionTag);
+            // }
 
+            
+            
             // REVIEW: Similar to the above. Note that we avoid duplicates!
             // We don't want to append the category name if the <select> already has this category as an option.
             category = $(this).attr('data-category');
 
-            // TODO: Refactor this concatenation using a template literal.
-            optionTag = '<option value="' + category + '">' + category + '</option>';
+            optionTag = `<option value=${category}>${category}</option>`;
+            // optionTag = '<option value="' + category + '">' + category + '</option>';
 
-            if ($('#category-filter option[value="' + category + '"]').length === 0) {
+            if ($(`category-filter option[value=${category}]`.length === 0)) {
                 $('#category-filter').append(optionTag);
             }
+            
+            // if ($('#category-filter option[value="' + category + '"]').length === 0) {
+            //     $('#category-filter').append(optionTag);
+            // }
         }
     });
 };
