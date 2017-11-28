@@ -1,0 +1,61 @@
+.main-nav{
+    display: flex;
+    position: relative;
+}
+
+.icon-menu{
+    position: absolute;
+    right: 5px;
+    top: -130px;
+}
+
+.template {
+    display: none;
+}
+
+nav ul {
+    display: none;
+}
+
+nav li {
+    border-bottom: 1px solid grey;
+    padding: 5px 0px 5px 0px;
+    color: grey;
+    font-family: serif;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.icon-menu:hover + ul {
+    display: block;
+    width: 100%;
+}
+
+
+@media (min-width: 640px) {
+    .icon-menu {
+        visibility: hidden;
+    }
+
+    nav ul {
+        display: flex;
+        list-style-type: none;
+        padding-left: 30px;
+    }
+
+    nav ul li {
+        padding-right: 30px;
+        border-bottom: none;
+    }
+
+    img {
+        width: inherit;
+    }
+}
+
+/* add padding to byline elements */
+address,
+time {
+    padding: 0 0.5em 0 0.5em;
+}
+
