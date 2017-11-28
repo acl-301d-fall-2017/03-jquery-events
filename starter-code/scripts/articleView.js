@@ -20,6 +20,7 @@ articleView.populateFilters = function() {
 
             if ($(`#category-filter option[value=${category}]`.length === 0)) {
                 $('#category-filter').append(optionTag);
+                //still has repeats in menu
             }
         }
     });
@@ -29,20 +30,29 @@ articleView.handleAuthorFilter = function() {
     $('#author-filter').on('change', function() {
         if ($(this).val()) {
             $('#articles').hide();
-            $(`#articles[author=${this.author}]`).show();
+            $('#articles').attr(`name=${this.name}`).show();
             // TODO: If the <select> menu was changed to an option that has a value, we first need to hide all the articles, and then show just the ones that match for the author that was selected.
             // Use an "attribute selector" to find those articles, and fade them in for the reader.
 
         } else {
             $('#articles.draft').show();
-            // TODO: If the <select> menu was changed to an option that is blank, we should first show all the articles, except the one article we are using as a template.
-
         }
         $('#category-filter').val('');
     });
 };
 
 articleView.handleCategoryFilter = function() {
+    $('#category-filter').on('change', function() {
+        if ($(this).val()) {
+            $('#articles').hide();
+            $(`#articles[category=${this.category}]`).show(); //does not work
+
+        } else {
+            $('#articles.draft').show();
+        }
+        $('#author-filter').val('');
+    });
+
     // TODO: Just like we do for #author-filter above, we should handle change events on the #category-filter element.
     // When an option with a value is selected, hide all the articles, then reveal the matches.
     // When the blank (default) option is selected, show all the articles, except for the template.
@@ -54,8 +64,8 @@ articleView.handleMainNav = function() {
     // TODO: Add an event handler to .main-nav elements that will power the Tabs feature.
     // Clicking any .tab element should hide all the .tab-content sections, and then reveal the single .tab-content section that is associated with the clicked .tab element.
     // So: You need to dynamically build a selector string with the correct ID, based on the data available to you on the .tab element that was clicked.
-    const clickedTabData = $(this).attr('data-content');
-    console.log(`${clickedTabData} was clicked!`);
+    const clickedTabData = $(this).attr('data-content');//not working
+    console.log(`${clickedTabData} was clicked!`);//not working
     // $('.tab-content').hide();
     // $(`section#${clickedTabData}`).show();
     
@@ -77,5 +87,5 @@ articleView.setTeasers = function() {
 $(document).ready(function() {
     articleView.populateFilters();
     articleView.handleAuthorFilter();
-    // articleView.handleMainNav(); 
+    articleView.handleCategoryFilter();
 });
