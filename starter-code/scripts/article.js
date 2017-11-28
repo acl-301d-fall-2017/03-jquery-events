@@ -19,7 +19,6 @@ Article.prototype.toHtml = function () {
     }
     $newArticle.attr('data-category', this.category);
     $newArticle.attr('data-author', this.author);
-
     $newArticle.find('.byline a').html(this.author);
     $newArticle.find('.byline a').attr('href', this.authorUrl);
     $newArticle.find('h1:first').html(this.title);
